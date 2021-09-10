@@ -6,6 +6,7 @@ root.resizable(width=NO,height=NO)
 
 #<----------------- function to display student information when enter button clicked ----------->
 def Enter_button_click():
+	global dis_name,dept_name,dis_level
 	dis_name = Label(sub_frame5,text= (name_entry.get()).upper(),fg="black", bg ="white",font ="serief 9 bold")
 	dis_name.place(x=60,y=60)
 	dept_name = Label(sub_frame5,text= (matric_entry.get()).upper(),fg="black", bg ="white",font ="serief 9 bold")
@@ -30,6 +31,7 @@ def total_units():
 
 #<----------------- function to display student information on screen when total button clicked ----------->
 def display():
+	global dis_gp
 	list3 = [int(c1.get())*int(u1.get()),int(c2.get())*int(u2.get()),int(c3.get())*int(u3.get()),
 		int(c4.get())*int(u4.get()),int(c5.get())*int(u5.get()),int(c6.get())*int(u6.get()),
 		int(c7.get())*int(u7.get()),int(c8.get())*int(u8.get()),int(c9.get())*int(u9.get()),
@@ -44,6 +46,19 @@ def total_cal():
 	total_gradePoint()
 	total_units()
 	display()
+
+#<----------------- function to clear all the entries values when the clear button clicked ----------->
+def clear_button():
+	delete_val = [name_entry,matric_entry,level_entry,c1,c2,c3,c4,c5,c6,c7,c8,c9,
+					c10,c11,u1,u2,u3,u4,u5,u6,u7,u8,u9,u10,u11,total_grade_entry,total_unit_entry]
+
+	for num in range(0,len(delete_val)):
+		delete_val[num].delete(0,END) 
+
+	dis_name.configure(text="")
+	dept_name.configure(text="")
+	dis_level.configure(text="")
+	dis_gp.configure(text="")
 
 #<----------------- label widget for project title  ----------->
 project_name = Label(root,text= "GPA / CGPA CALCULATOR",bd=4,fg="white",bg="#003151",font="Roboto 17 bold",relief=GROOVE).place(x=0,y=0,width=959,height=40)
@@ -164,8 +179,12 @@ total_unit_entry.place(x=140,y=35)
 #<----------------------- button widget for total grade point and total unit course --------------------->
 cal_button = Button(sub_frame4,text="Calculate",padx=16,pady=2,relief=GROOVE,bd=3,bg="#003151",fg="white",font="Roboto 10 bold",command=total_cal)
 cal_button.place(x=350,y=15)
-exit_button = Button(sub_frame4,text="Exit",padx=15,pady=2,relief=GROOVE,bd=3,bg="#003151",fg="white",font="Roboto 10 bold",command=root.quit)
-exit_button.place(x=500,y=15)
+
+clear_button = Button(sub_frame4,text="Clear",padx=15,pady=2,relief=GROOVE,bd=3,bg="#003151",fg="white",font="Roboto 10 bold",command=clear_button)
+clear_button.place(x=500,y=15)
+
+exit_button = Button(sub_frame4,text="Exit",padx=20,pady=2,relief=GROOVE,bd=3,bg="#003151",fg="white",font="Roboto 10 bold",command=root.quit)
+exit_button.place(x=600,y=15)
 
 #<----------------- childreen frame for student information, total grade point and total unit course  ------------------------------>
 sub_frame5 = Frame(main_frame,bg="white",bd=6,relief=GROOVE)
